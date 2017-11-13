@@ -4,10 +4,10 @@ createGraph3();
 */
 
 
-
+//load up the first graph
 createGraph1();
 
-
+//function to read in the text file
 function readTextFile(file, callback) {
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
@@ -20,25 +20,31 @@ function readTextFile(file, callback) {
     rawFile.send(null);
 }
 
+//calls the average income function and ideal price function when optimized is
+//clicked
 function buttonClick() {
   calculateAverageIncome();
   findIdealPrice();
 }
 
+//calculates average income
 function calculateAverageIncome() {
     /*get latitude and longitude*/
     var data;
     var user_long;
     var user_lat;
 
+    //parse the data
     readTextFile("airbnb-public-sep-2017/airbnb-sep-2017/average.json", function(text){
         data = JSON.parse(text);
 
     });
 
+    //get user input
     var user_long = parseFloat(document.getElementById("longitude").value);
     var user_lat = parseFloat(document.getElementById("latitude").value);
 
+    //make sure that user input is within the range
     if ( (user_long > -122.36475849999999) ||
         (user_long < -122.5115) || (user_lat < 37.706927690000001) ||
          (user_lat > 37.83109279) ) {
@@ -51,14 +57,14 @@ function calculateAverageIncome() {
         var i, sum = 0, num_sum = 0, average=0, latitude = [], longitude = [], prices = [];
 
 
-
+        //converts the strings in the json to floats
         for (i = 0; i < 8706; i++) {
             latitude.push(parseFloat(data['latitude'][i]));
             longitude.push(parseFloat(data['longitude'][i]));
             prices.push(parseFloat(data['price'][i]));
         }
 
-
+        //find all the coordinates that are .01 away and add up their prices
         for (i = 0; i < 8706; i++) {
           if ((latitude[i] >= (user_lat - .01)) && (latitude[i] <= (user_lat + .01))
               && (longitude[i] >= (user_long - .01)) && (longitude[i] <= (user_long + .01))) {
@@ -67,10 +73,13 @@ function calculateAverageIncome() {
           }
         }
 
+        //Some coordinates do not have enough listings by them to give an
+        //accurate read
         if (sum == 0) {
           window.alert("Not enough data");
         }
         else {
+          //computer the average
           average = (sum/num_sum)*7;
 
           document.getElementById("average").innerHTML = "You will earn an average of: $" + (Math.round(average * 100) / 100) + " per week.";
@@ -79,17 +88,22 @@ function calculateAverageIncome() {
     }
 }
 
+//finds the ideal price
 function findIdealPrice() {
 
     var data;
+
+    //read in the text file
     readTextFile("airbnb-public-sep-2017/airbnb-sep-2017/optimal.json", function(text){
         data = JSON.parse(text);
 
     });
 
+    //get user longitude and latitude
     var user_long = parseFloat(document.getElementById("longitude").value);
     var user_lat = parseFloat(document.getElementById("latitude").value);
 
+    //make sure it is in the range
     if ( (user_long > -122.36475849999999) ||
         (user_long < -122.5115) || (user_lat < 37.706927690000001) ||
          (user_lat > 37.83109279) ) {
@@ -104,12 +118,13 @@ function findIdealPrice() {
           var top_price = [0,0,0];
 
 
-
+          //convert data to floats
           for (i = 0; i < 8706; i++) {
               latitude.push(parseFloat(data['latitude'][i]));
               longitude.push(parseFloat(data['longitude'][i]));
               prices.push(parseFloat(data['price'][i]));
               num_reviews.push(parseInt(data['num_reviews'][i]));
+              //get rid of the NaN values in the data
               if (num_reviews[i] == 0) {
                 ratings.push(0);
               }
@@ -117,14 +132,15 @@ function findIdealPrice() {
                 ratings.push(parseInt(data['review_score'][i]));
             }
           }
-
+          //find the listings near the coordinates
           for (i = 0; i < 8706; i++) {
             if ((latitude[i] >= (user_lat - .01)) && (latitude[i] <= (user_lat + .01))
                 && (longitude[i] >= (user_long - .01)) && (longitude[i] <= (user_long + .01))) {
                   if(num_reviews[i] != 0) {
-
+                      //multiple the number of reviews times the rating score
                       score = num_reviews[i] * ratings[i];
 
+                      //find the top scores
                       if (score > top_score[0] && score < top_score[1] && score< top_score[2]) {
                           top_score[0] = score;
                           top_price[0] = prices[i];
@@ -143,7 +159,7 @@ function findIdealPrice() {
     }
 
 }
-
+  //average the top 3 scores's prices
   var optimal = (top_price[0] + top_price[1] + top_price[2]) / 3;
   document.getElementById("content").innerHTML = "The optimal price per night based on location is: $" + (Math.round(optimal * 100) / 100);
 
