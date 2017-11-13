@@ -208,6 +208,7 @@ function createGraph2() {
         dataSource: {
             "chart": {
                 "caption": "Number of Amenities Offered",
+                "subCaption": "Percentage of Listings with x Amenities",
                 "paletteColors": "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000",
                 "chartLeftMargin": "80",
                 "bgColor": "#ffffff",
