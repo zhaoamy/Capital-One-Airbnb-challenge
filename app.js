@@ -154,7 +154,7 @@ function createGraph1() {
     var chart1 = new FusionCharts({
       "type": "column2d",
       "renderAt": "chartContainer",
-      "width": "1350",
+      "width": "1400",
       "height": "500",
       "dataFormat": "json",
       "dataSource": {
@@ -162,7 +162,7 @@ function createGraph1() {
             "caption": "Popularity of Neighborhood Listings",
             "xAxisName": "Neighborhoods",
             "yAxisName": "Number of Listings",
-            "chartLeftMargin": "50",
+            "chartLeftMargin": "80",
             "xAxisNameBorderPadding": "100",
             "xAxisNameFontSize": "15",
             "yAxisNameFontSize": "15",
@@ -186,7 +186,7 @@ function createGraph2() {
     var pieChart = new FusionCharts({
         type: 'pie2d',
         renderAt: 'chartContainer',
-        "width": "1350",
+        "width": "1400",
         "height": "500",
         dataFormat: 'json',
         dataSource: {
@@ -246,7 +246,7 @@ function createGraph3() {
     var chart3 = new FusionCharts({
     type: 'bar2d',
     renderAt: 'chartContainer',
-    "width": "1350",
+    "width": "1400",
     "height": "500",
     dataFormat: 'json',
     dataSource: {
@@ -254,6 +254,7 @@ function createGraph3() {
             "caption": "Number of Amenities vs Number of Reviews",
             "yAxisName": "Number of Reviews",
             "xAxisName": "Number of Amenities",
+            "chartLeftMargin": "80",
             "paletteColors": "#0075c2",
             "bgColor": "#ffffff",
             "showBorder": "0",
