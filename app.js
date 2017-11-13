@@ -162,6 +162,7 @@ function createGraph1() {
             "caption": "Popularity of Neighborhood Listings",
             "xAxisName": "Neighborhoods",
             "yAxisName": "Number of Listings",
+            "chartLeftMargin": "50",
             "xAxisNameBorderPadding": "100",
             "xAxisNameFontSize": "15",
             "yAxisNameFontSize": "15",
@@ -192,7 +193,7 @@ function createGraph2() {
             "chart": {
                 "caption": "Number of Amenities Offered",
                 "paletteColors": "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000",
-                "chartLeftMargin": "100",
+                "chartLeftMargin": "80",
                 "bgColor": "#ffffff",
                 "showBorder": "0",
                 "use3DLighting": "0",
