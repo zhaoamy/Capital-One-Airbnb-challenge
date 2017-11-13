@@ -11,16 +11,24 @@ body {
     overflow-x: hidden;
 }
 
-header {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 20px;
+.h2, h2 {
+    font-size: 30px;
     line-height: 1.42857143;
     color: white;
+    padding-bottom: 20px;
+}
+input {
+  color: black;
 }
 
 .jumbotron {
+  margin-bottom: 0px;
   background-color: #fd5c63;
   color: white;
+  text-align: center;
+  padding-top:20px;
+  padding-bottom:20px;
+
 }
 
 .navbar {
@@ -38,4 +46,9 @@ header {
 
 .navbar-nav {
   float: right;
+}
+
+.btn-danger {
+  margin-right: 10px;
+  background-color: #fd5c63;
 }
